@@ -1,0 +1,23 @@
+{
+  "name": "cerebral-game-library",
+  "version": "1.0.0",
+  "description": "Organize your game collection",
+  "main": "index.js",
+  "repository": "https://github.com/danielasy/game-library.git",
+  "author": "Daniela Sayuri Yassuda <danielayassuda@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "babel-node app/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "glob": "^7.1.2",
+    "mysql2": "^1.3.6",
+    "sequelize": "^4.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0"
+  }
+}

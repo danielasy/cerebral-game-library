@@ -16,6 +16,7 @@ export default {
     database: 'gamelibrarytest',
     username: 'root',
     password: 'root',
+    logging: false,
   },
   production: {
     dialect: 'mysql',

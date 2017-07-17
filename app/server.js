@@ -1,28 +1,28 @@
-import Express from 'express';
-import BodyParser from 'body-parser';
-import Db from './db';
-import API from './api';
+import express from 'express';
+import bodyParser from 'body-parser';
+import db from './db';
+import api from './api';
 
-const app = Express();
+const app = express();
 
-app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function(req, res) {
   res.send('Ok');
 });
 
-app.use('/api', API);
+app.use('/api', api);
 
 app.listen(5000, function(err) {
   if(!err) {
-    Db.sequelize
+    db.sequelize
       .authenticate()
       .then(() => {
         if (process.env.NODE_ENV === 'development') {
           console.log('Connection with database has been established successfully.');
         }
-        Db.sequelize.sync();
+        db.sequelize.sync();
       })
       .catch(err => {
         console.error('Unable to connect to the database:', err);

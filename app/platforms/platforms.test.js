@@ -1,16 +1,16 @@
-import Chai from 'Chai';
-import ChaiHttp from 'Chai-http';
-import Server from '../server';
-import Db from '../db';
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../server';
+import db from '../db';
 
-const expect = Chai.expect;
-const Platform = Db.Platform;
+const expect = chai.expect;
+const Platform = db.Platform;
 
-Chai.use(ChaiHttp);
+chai.use(chaiHttp);
 
 describe('Platform', () => {
   before(function () {
-    return Db.sequelize.sync();
+    return db.sequelize.sync();
   });
 
   beforeEach(function () {
@@ -19,8 +19,8 @@ describe('Platform', () => {
 
   describe('GET platforms', () => {
     it('it should GET zero platforms', done => {
-      Chai
-        .request(Server)
+      chai
+        .request(server)
         .get('/api/platforms')
         .end((err, res) => {
           expect(res).to.have.deep.property('status', 200);
@@ -40,8 +40,8 @@ describe('Platform', () => {
           {name: 'Nintendo 3DS'},
         ])
         .then(newPlatforms => {
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .get('/api/platforms')
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);
@@ -55,8 +55,8 @@ describe('Platform', () => {
 
   describe('POST platforms', () => {
     it('it should POST a new platform', done => {
-      Chai
-        .request(Server)
+      chai
+        .request(server)
         .post('/api/platforms')
         .send({name: 'PlayStation 4'})
         .end((err, res) => {
@@ -80,8 +80,8 @@ describe('Platform', () => {
         .then(newPlatform => {
           id = newPlatform.id;
 
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .put('/api/platforms/' + id)
             .send({name: 'PlayStation 3'})
             .end((err, res) => {
@@ -102,8 +102,8 @@ describe('Platform', () => {
         .then(newPlatform => {
           id = newPlatform.id;
 
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .delete('/api/platforms/' + id)
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);

@@ -1,6 +1,6 @@
-import Models from '../db';
+import models from '../db';
 
-const Platform = Models.Platform;
+const Platform = models.Platform;
 
 const index = (req, res) => {
   Platform

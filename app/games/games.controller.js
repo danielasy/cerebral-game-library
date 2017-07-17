@@ -1,6 +1,6 @@
-import Models from '../db';
+import models from '../db';
 
-const Game = Models.Game;
+const Game = models.Game;
 
 const index = (req, res) => {
   Game

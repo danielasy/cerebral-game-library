@@ -1,6 +1,6 @@
-import Models from '../db';
+import models from '../db';
 
-const Genre = Models.Genre;
+const Genre = models.Genre;
 
 const index = (req, res) => {
   Genre

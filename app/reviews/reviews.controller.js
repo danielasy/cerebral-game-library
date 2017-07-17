@@ -1,6 +1,6 @@
-import Models from '../db';
+import models from '../db';
 
-const Review = Models.Review;
+const Review = models.Review;
 
 const index = (req, res) => {
   Review

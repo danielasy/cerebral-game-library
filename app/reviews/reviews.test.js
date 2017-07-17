@@ -1,19 +1,19 @@
-import Chai from 'Chai';
-import ChaiHttp from 'Chai-http';
-import Server from '../server';
-import Db from '../db';
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../server';
+import db from '../db';
 
-const expect = Chai.expect;
-const Game = Db.Game;
-const Review = Db.Review;
+const expect = chai.expect;
+const Game = db.Game;
+const Review = db.Review;
 
-Chai.use(ChaiHttp);
+chai.use(chaiHttp);
 
 describe('Review', () => {
   let gameId;
 
   before(function () {
-    return Db
+    return db
       .sequelize
       .sync()
       .then(() => {
@@ -35,8 +35,8 @@ describe('Review', () => {
 
   describe('GET reviews', () => {
     it('it should GET zero reviews', done => {
-      Chai
-        .request(Server)
+      chai
+        .request(server)
         .get('/api/reviews')
         .end((err, res) => {
           expect(res).to.have.deep.property('status', 200);
@@ -54,8 +54,8 @@ describe('Review', () => {
           {rating: 4.5, text: 'Recomendado', GameId: gameId},
         ])
         .then(newReviews => {
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .get('/api/reviews')
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);
@@ -69,8 +69,8 @@ describe('Review', () => {
 
   describe('POST reviews', () => {
     it('it should POST a new review', done => {
-      Chai
-        .request(Server)
+      chai
+        .request(server)
         .post('/api/reviews')
         .send({rating: 4.5, text: 'Recomendado', GameId: gameId})
         .end((err, res) => {
@@ -94,8 +94,8 @@ describe('Review', () => {
         .then(newReview => {
           id = newReview.id;
 
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .put('/api/reviews/' + id)
             .send({rating: 3.5, text: 'Gostei', GameId: gameId})
             .end((err, res) => {
@@ -116,8 +116,8 @@ describe('Review', () => {
         .then(newReview => {
           id = newReview.id;
 
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .delete('/api/reviews/' + id)
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);

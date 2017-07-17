@@ -1,21 +1,21 @@
-import Chai from 'Chai';
-import ChaiHttp from 'Chai-http';
-import Server from '../server';
-import Db from '../db';
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../server';
+import db from '../db';
 
-const expect = Chai.expect;
-const Game = Db.Game;
-const Genre = Db.Genre;
-const Platform = Db.Platform;
+const expect = chai.expect;
+const Game = db.Game;
+const Genre = db.Genre;
+const Platform = db.Platform;
 
-Chai.use(ChaiHttp);
+chai.use(chaiHttp);
 
 describe('Game', () => {
   let genreId;
   let platformId;
 
   before(function () {
-    return Db
+    return db
       .sequelize
       .sync()
       .then(() => {
@@ -37,8 +37,8 @@ describe('Game', () => {
 
   describe('GET games', () => {
     it('it should GET zero games', done => {
-      Chai
-        .request(Server)
+      chai
+        .request(server)
         .get('/api/games')
         .end((err, res) => {
           expect(res).to.have.deep.property('status', 200);
@@ -65,8 +65,8 @@ describe('Game', () => {
           },
         ])
         .then(newGames => {
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .get('/api/games')
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);
@@ -80,8 +80,8 @@ describe('Game', () => {
 
   describe('POST games', () => {
     it('it should POST a new game', done => {
-      Chai
-        .request(Server)
+      chai
+        .request(server)
         .post('/api/games')
         .send({title: 'Rocket League', year: new Date(2015), price: 36.99})
         .end((err, res) => {
@@ -105,8 +105,8 @@ describe('Game', () => {
         .then(newGame => {
           id = newGame.id;
 
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .put('/api/games/' + id)
             .send({title: 'Rocket League ®', year: new Date(2015), price: 46.99})
             .end((err, res) => {
@@ -127,8 +127,8 @@ describe('Game', () => {
         .then(newGame => {
           id = newGame.id;
 
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .delete('/api/games/' + id)
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);

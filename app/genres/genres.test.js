@@ -1,16 +1,16 @@
-import Chai from 'Chai';
-import ChaiHttp from 'Chai-http';
-import Server from '../server';
-import Db from '../db';
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../server';
+import db from '../db';
 
-const expect = Chai.expect;
-const Genre = Db.Genre;
+const expect = chai.expect;
+const Genre = db.Genre;
 
-Chai.use(ChaiHttp);
+chai.use(chaiHttp);
 
 describe('Genre', () => {
   before(function () {
-    return Db.sequelize.sync();
+    return db.sequelize.sync();
   });
 
   beforeEach(function () {
@@ -19,8 +19,8 @@ describe('Genre', () => {
 
   describe('GET genres', () => {
     it('it should GET zero genres', done => {
-      Chai
-        .request(Server)
+      chai
+        .request(server)
         .get('/api/genres')
         .end((err, res) => {
           expect(res).to.have.deep.property('status', 200);
@@ -40,8 +40,8 @@ describe('Genre', () => {
           {name: 'Quebra-cabeça'},
         ])
         .then(newGenres => {
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .get('/api/genres')
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);
@@ -55,8 +55,8 @@ describe('Genre', () => {
 
   describe('POST genres', () => {
     it('it should POST a new genre', done => {
-      Chai
-        .request(Server)
+      chai
+        .request(server)
         .post('/api/genres')
         .send({name: 'Plataforma'})
         .end((err, res) => {
@@ -80,8 +80,8 @@ describe('Genre', () => {
         .then(newGenre => {
           id = newGenre.id;
 
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .put('/api/genres/' + id)
             .send({name: 'Estratégia'})
             .end((err, res) => {
@@ -102,8 +102,8 @@ describe('Genre', () => {
         .then(newGenre => {
           id = newGenre.id;
 
-          Chai
-            .request(Server)
+          chai
+            .request(server)
             .delete('/api/genres/' + id)
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);

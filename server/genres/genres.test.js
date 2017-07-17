@@ -1,27 +1,27 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../server';
+import server from '../index';
 import db from '../db';
 
 const expect = chai.expect;
-const Platform = db.Platform;
+const Genre = db.Genre;
 
 chai.use(chaiHttp);
 
-describe('Platform', () => {
+describe('Genre', () => {
   before(function () {
     return db.sequelize.sync();
   });
 
   beforeEach(function () {
-    return Platform.destroy({where: {}});
+    return Genre.destroy({where: {}});
   });
 
-  describe('GET platforms', () => {
-    it('it should GET zero platforms', done => {
+  describe('GET genres', () => {
+    it('it should GET zero genres', done => {
       chai
         .request(server)
-        .get('/api/platforms')
+        .get('/api/genres')
         .end((err, res) => {
           expect(res).to.have.deep.property('status', 200);
           expect(res.body).to.be.an('array');
@@ -30,19 +30,19 @@ describe('Platform', () => {
         });
     });
 
-    it('it should GET some platforms', done => {
+    it('it should GET some genres', done => {
       let id;
 
-      Platform
+      Genre
         .bulkCreate([
-          {name: 'PlayStation 3'},
-          {name: 'PlayStation 4'},
-          {name: 'Nintendo 3DS'},
+          {name: 'Tiro em Primeira Pessoa'},
+          {name: 'Esporte'},
+          {name: 'Quebra-cabeça'},
         ])
-        .then(newPlatforms => {
+        .then(newGenres => {
           chai
             .request(server)
-            .get('/api/platforms')
+            .get('/api/genres')
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);
               expect(res.body).to.be.an('array');
@@ -53,16 +53,16 @@ describe('Platform', () => {
     });
   });
 
-  describe('POST platforms', () => {
-    it('it should POST a new platform', done => {
+  describe('POST genres', () => {
+    it('it should POST a new genre', done => {
       chai
         .request(server)
-        .post('/api/platforms')
-        .send({name: 'PlayStation 4'})
+        .post('/api/genres')
+        .send({name: 'Plataforma'})
         .end((err, res) => {
           expect(res).to.have.deep.property('status', 200);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.include({name: 'PlayStation 4'});
+          expect(res.body).to.include({name: 'Plataforma'});
           expect(res.body).to.have.property('id');
           expect(res.body).to.have.property('createdAt');
           expect(res.body).to.have.property('updatedAt');
@@ -71,19 +71,19 @@ describe('Platform', () => {
     });
   });
 
-  describe('PUT platforms', () => {
-    it('it should PUT updated data in a platform', done => {
+  describe('PUT genres', () => {
+    it('it should PUT updated data in a genre', done => {
       let id;
 
-      Platform
-        .create({name: 'PlayStation 4'})
-        .then(newPlatform => {
-          id = newPlatform.id;
+      Genre
+        .create({name: 'Plataforma'})
+        .then(newGenre => {
+          id = newGenre.id;
 
           chai
             .request(server)
-            .put('/api/platforms/' + id)
-            .send({name: 'PlayStation 3'})
+            .put('/api/genres/' + id)
+            .send({name: 'Estratégia'})
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);
               expect(res.body).to.be.an('array').that.does.include(1);
@@ -93,18 +93,18 @@ describe('Platform', () => {
     });
   });
 
-  describe('DELETE platforms', () => {
-    it('it should DELETE a platform', done => {
+  describe('DELETE genres', () => {
+    it('it should DELETE a genre', done => {
       let id;
 
-      Platform
-        .create({name: 'PlayStation 4'})
-        .then(newPlatform => {
-          id = newPlatform.id;
+      Genre
+        .create({name: 'Plataforma'})
+        .then(newGenre => {
+          id = newGenre.id;
 
           chai
             .request(server)
-            .delete('/api/platforms/' + id)
+            .delete('/api/genres/' + id)
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);
               expect(res.body).to.equal(1);

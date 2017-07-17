@@ -1,19 +1,17 @@
 import Sequelize from 'sequelize';
 import glob from 'glob';
 import path from 'path';
+import config from '../config/db';
 
 const env = process.env.NODE_ENV || 'development';
 const db = {};
 
-let sequelize = new Sequelize('gamelibrary', 'root', 'root', {
-  host: 'localhost',
-  dialect: 'mysql',
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  },
-});
+let sequelize = new Sequelize(
+  config[env].database,
+  config[env].username,
+  config[env].password,
+  config[env]
+);
 
 const files = glob.sync("**/*.model.js", { cwd: __dirname });
 

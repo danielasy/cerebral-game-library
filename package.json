@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Organize your game collection",
   "main": "index.js",
-  "repository": "https://github.com/danielasy/game-library.git",
+  "repository": "https://github.com/danielasy/cerebral-game-library.git",
   "author": "Daniela Sayuri Yassuda <danielayassuda@gmail.com>",
   "license": "MIT",
   "scripts": {

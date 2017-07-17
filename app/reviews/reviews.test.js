@@ -20,7 +20,7 @@ describe('Review', () => {
         return Game.create({
           title: 'Rocket League',
           year: new Date(2015),
-          price: '36.99',
+          price: 36.99,
         })
         .then(newGame => {
           gameId = newGame.id;

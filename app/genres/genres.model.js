@@ -2,6 +2,9 @@ export default function(sequelize, DataTypes) {
   const Genre = sequelize.define('Genre', {
     name: {
       type: DataTypes.STRING(70),
+      validate: {
+        notEmpty: true,
+      },
     },
   });
 

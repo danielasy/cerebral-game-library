@@ -2,12 +2,22 @@ export default function(sequelize, DataTypes) {
   const Game = sequelize.define('Game', {
     title: {
       type: DataTypes.STRING(140),
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     relase: {
       type: DataTypes.DATEONLY,
+      validate: {
+        isDate: true,
+      },
     },
     price: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL(6,2),
+      validate: {
+        isDecimal: true,
+      },
     },
   });
 

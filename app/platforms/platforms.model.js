@@ -2,6 +2,9 @@ export default function(sequelize, DataTypes) {
   const Platform = sequelize.define('Platform', {
     name: {
       type: DataTypes.STRING(70),
+      validate: {
+        notEmpty: true,
+      },
     },
   });
 

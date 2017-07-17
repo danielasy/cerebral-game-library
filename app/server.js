@@ -5,6 +5,7 @@ import API from './api';
 
 const app = Express();
 
+app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 
 app.get('/', function(req, res) {
@@ -18,8 +19,10 @@ app.listen(5000, function(err) {
     Db.sequelize
       .authenticate()
       .then(() => {
-        console.log('Connection with database has been established successfully.');
-        Db.sequelize.sync({ force: true }).then(() => console.log('Ok'))
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Connection with database has been established successfully.');
+        }
+        Db.sequelize.sync();
       })
       .catch(err => {
         console.error('Unable to connect to the database:', err);
@@ -29,3 +32,5 @@ app.listen(5000, function(err) {
     console.log(err);
   }
 });
+
+export default app;

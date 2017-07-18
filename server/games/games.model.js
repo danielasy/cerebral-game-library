@@ -7,7 +7,7 @@ export default function(sequelize, DataTypes) {
         notEmpty: true,
       },
     },
-    relase: {
+    release: {
       type: DataTypes.DATEONLY,
       validate: {
         isDate: true,

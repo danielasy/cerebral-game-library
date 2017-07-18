@@ -2,6 +2,7 @@ export default function(sequelize, DataTypes) {
   const Review = sequelize.define('Review', {
     rating: {
       type: DataTypes.DECIMAL(4,2),
+      allowNull: false,
       validate: {
         isDecimal: true,
         max: 5.0,

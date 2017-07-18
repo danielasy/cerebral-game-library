@@ -1,0 +1,24 @@
+{
+  "name": "cerebral-game-library-client",
+  "version": "1.0.0",
+  "description": "Organize your game collection",
+  "main": "src/index.js",
+  "repository": "https://github.com/danielasy/cerebral-game-library.git",
+  "author": "Daniela Sayuri Yassuda <danielayassuda@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "nwb clean-app",
+    "build": "nwb build-react-app",
+    "start": "nwb serve-react-app"
+  },
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "nwb": "^0.18.8"
+  }
+}

@@ -55,12 +55,12 @@ describe('Game', () => {
         .bulkCreate([
           {
             title: 'Jogo 1',
-            year: new Date(2014),
+            release: '2014-01-01',
             price: 79.99,
           },
           {
             title: 'Jogo 2',
-            year: new Date(2015),
+            release: '2015-01-01',
             price: 59.99,
           },
         ])
@@ -83,7 +83,7 @@ describe('Game', () => {
       chai
         .request(server)
         .post('/api/games')
-        .send({title: 'Rocket League', year: new Date(2015), price: 36.99})
+        .send({title: 'Rocket League', release: '2015-01-01', price: 36.99})
         .end((err, res) => {
           expect(res).to.have.deep.property('status', 200);
           expect(res.body).to.be.an('object');
@@ -101,14 +101,14 @@ describe('Game', () => {
       let id;
 
       Game
-        .create({title: 'Rocket League', year: new Date(2015), price: 36.99})
+        .create({title: 'Rocket League', release: '2015-01-01', price: 36.99})
         .then(newGame => {
           id = newGame.id;
 
           chai
             .request(server)
             .put('/api/games/' + id)
-            .send({title: 'Rocket League ®', year: new Date(2015), price: 46.99})
+            .send({title: 'Rocket League ®', release: '2015-01-01', price: 46.99})
             .end((err, res) => {
               expect(res).to.have.deep.property('status', 200);
               expect(res.body).to.be.an('array').that.does.include(1);
@@ -123,7 +123,7 @@ describe('Game', () => {
       let id;
 
       Game
-        .create({title: 'Rocket League', year: new Date(2015), price: 36.99})
+        .create({title: 'Rocket League', release: '2015-01-01', price: 36.99})
         .then(newGame => {
           id = newGame.id;
 

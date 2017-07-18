@@ -23,8 +23,8 @@ export default function(sequelize, DataTypes) {
 
   Game.associate = (models) => {
     Game.hasOne(models.Review);
-    Game.belongsToMany(models.Genre, { through: 'GameGenre' });
-    Game.belongsToMany(models.Platform, { through: 'GamePlatform' });
+    Game.belongsToMany(models.Genre, { as: 'genres', through: 'GameGenre' });
+    Game.belongsToMany(models.Platform, { as: 'platforms', through: 'GamePlatform' });
   };
 
   return Game;

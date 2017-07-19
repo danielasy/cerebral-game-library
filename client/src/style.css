@@ -19,6 +19,10 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
 .game-title {
 	font-size: 18px;
 	margin-bottom: 5px;
@@ -29,4 +33,9 @@ time, mark, audio, video {
   line-height: 24px;
   padding-right: 25px;
   vertical-align: top;
+}
+
+.price-estimate {
+	padding: 40px 0;
+	text-align: center;
 }

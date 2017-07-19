@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
   return {
     games: state.games,
     isLoading: state.gamesIsLoading,
-    hasFailedLoading: state.gamesHasFailedLoading,
+    hasFailedLoading: state.gamesLoadHasFailed,
   };
 };
 

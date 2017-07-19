@@ -11,8 +11,10 @@ class Game extends Component {
   }
 
   getReleaseYear = (dateString) => {
-    const date = dateString.split('-');
-    return date[0];
+    if (!dateString) {
+      return 'N/A';
+    }
+    return dateString.split('-')[0];
   }
 
   renderGameInfo = () => {

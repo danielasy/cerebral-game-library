@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { gamesOpenDialog } from '../actions/games';
 import { genresOpenDialog } from '../actions/genres';
 import { platformsOpenDialog } from '../actions/platforms';
 import { Toolbar as CoreToolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
@@ -17,6 +18,7 @@ class Toolbar extends Component {
             label='Adicionar jogo'
             primary={true}
             icon={<FontIcon className='material-icons'>add_circle</FontIcon>}
+            onTouchTap={this.props.handleOpenGamesDialog}
           />
           <FlatButton
             label='Adicionar gênero'
@@ -42,6 +44,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    handleOpenGamesDialog: () => dispatch(gamesOpenDialog()),
     handleOpenGenresDialog: () => dispatch(genresOpenDialog()),
     handleOpenPlatformDialog: () => dispatch(platformsOpenDialog()),
   };

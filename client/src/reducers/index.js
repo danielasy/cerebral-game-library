@@ -1,6 +1,15 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { games, gamesHasFailedLoading, gamesIsLoading } from './games';
+import {
+  games,
+  gamesLoadHasFailed,
+  gamesIsLoading,
+  gamesToggleDialog,
+  gamesIsAdding,
+  gamesAddHasFailed,
+  gamesIsDeleting,
+  gamesDeleteHasFailed,
+} from './games';
 import {
   genres,
   genresLoadHasFailed,
@@ -25,8 +34,13 @@ import {
 export default combineReducers({
   form: formReducer,
   games,
-  gamesHasFailedLoading,
+  gamesLoadHasFailed,
   gamesIsLoading,
+  gamesIsDialogOpen: gamesToggleDialog,
+  gamesIsAdding,
+  gamesAddHasFailed,
+  gamesIsDeleting,
+  gamesDeleteHasFailed,
   genres,
   genresLoadHasFailed,
   genresIsLoading,

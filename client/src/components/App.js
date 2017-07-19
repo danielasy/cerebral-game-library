@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Toolbar from './Toolbar';
+import GameDialog from './GameDialog';
 import GenreDialog from './GenreDialog';
 import PlatformDialog from './PlatformDialog';
 import GameList from './GameList';
@@ -15,6 +16,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className='app-container'>
           <Toolbar />
+          <GameDialog />
           <GenreDialog />
           <PlatformDialog />
           <GameList />

@@ -43,6 +43,16 @@ const create = (req, res) => {
         return game;
       });
   })
+  .then(newGame => 
+    Game
+      .findById(newGame.id, {
+        include: [
+          {model: db.Genre, as: 'genres', attributes: ['name'], required: false},
+          {model: db.Platform, as: 'platforms', attributes: ['name'], required: false},
+          {model: db.Review, attributes: ['rating', 'text'], required: false},
+        ]
+      })
+  )
   .then(newGame => res.status(200).json(newGame))
   .catch(error => res.status(500).json(error));
 };
@@ -56,7 +66,7 @@ const show = (req, res) => {
         {model: db.Review, attributes: ['rating', 'text'], required: false},
       ]
     })
-    .then(author => res.status(200).json(author))
+    .then(game => res.status(200).json(game))
     .catch(error => res.status(500).json(error));
 };
 

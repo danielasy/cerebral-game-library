@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { gamesFetchData } from '../actions/games';
+import { List } from 'material-ui/List';
+import Game from './Game';
 
 class GameList extends Component {
   componentDidMount() {
@@ -18,29 +20,33 @@ class GameList extends Component {
     }
 
     return (
-      <ul>
+      <List>
         {this.props.games.map((game) => (
-          <li key={game.id}>
-            {game.title}
-          </li>
+          <Game
+            key={game.id}
+            id={game.id}
+            title={game.title}
+            price={game.price}
+            release={game.release}
+          />
         ))}
-      </ul>
+      </List>
     );
   }
 }
 
 GameList.propTypes = {
-  fetchData: PropTypes.func.isRequired,
   games: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   hasFailedLoading: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  fetchData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     games: state.games,
+    isLoading: state.gamesIsLoading,
     hasFailedLoading: state.gamesHasFailedLoading,
-    isLoading: state.gamesIsLoading
   };
 };
 

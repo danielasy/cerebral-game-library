@@ -37,6 +37,7 @@ class GameList extends Component {
             release={game.release}
             genres={game.genres}
             platforms={game.platforms}
+            rating={game.Review ? game.Review.rating : 0}
           />
         ))}
       </List>

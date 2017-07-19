@@ -5060,6 +5060,10 @@ react-redux@^4.4.5:
     loose-envify "^1.1.0"
     prop-types "^15.5.4"
 
+react-stars@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-stars/-/react-stars-2.1.0.tgz#b3fdd63c888b86fbf634fc15abbed2ffb7db07b1"
+
 react-tap-event-plugin@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-2.0.1.tgz#316beb3bc6556e29ec869a7293e89c826a9074d2"

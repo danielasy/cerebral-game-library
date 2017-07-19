@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ListItem } from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
+import RatingStars from 'react-stars';
 
 class Game extends Component {
   iconStyle = {
@@ -34,6 +35,22 @@ class Game extends Component {
     return dateString.split('-')[0];
   }
 
+  getRating() {
+    if (this.props.rating) {
+      return (
+        <span className='game-info'>
+          <RatingStars
+            count={5}
+            size={16}
+            color2={'#FDD835'}
+            edit={false}
+            value={this.props.rating}
+          />
+        </span>
+      )
+    }
+  }
+
   renderGameInfo = () => {
     return (
       <article>
@@ -53,10 +70,7 @@ class Game extends Component {
           <FontIcon className='material-icons' style={this.iconStyle}>date_range</FontIcon>
           Ano de lançamento: {this.getReleaseYear(this.props.release)}
         </span>
-        <span className='game-info'>
-          <FontIcon className='material-icons' style={this.iconStyle}>stars</FontIcon>
-          {this.props.rating ? `${this.props.rating}/5` : 'N/A'}
-        </span>
+        {this.getRating()}
       </article>
     )
   }

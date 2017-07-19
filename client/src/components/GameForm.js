@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm, destroy, formValueSelector } from 'redux-form';
+import { Field, reduxForm, destroy } from 'redux-form';
 import { TextField, Checkbox } from 'redux-form-material-ui';
 import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
-
-const selector = formValueSelector('addGame');
+import RatingStars from 'react-stars';
 
 const validate = values => {
   const errors = {};
@@ -20,18 +18,26 @@ const validate = values => {
   return errors;
 };
 
+const style = {
+  field: {
+    width: '100%',
+  },
+  form: {
+    marginBottom: '20px',
+  },
+};
+
 class GameForm extends React.Component {
-  style = {
-    field: {
-      width: '100%',
-    },
-    form: {
-      marginBottom: '20px',
-    },
+  constructor() {
+    super();
+    this.state = {rating: 0};
   }
 
-  // Workaround to make arrays of checkboxes work ;(
-  normalizeCheckboxes(values) {
+  onChangeRating(value) {
+    this.setState({rating: value});
+  }
+
+  normalizeFormValues(values) {
     const keys = Object.keys(values);
     const length = keys.length;
     values.genres = [];
@@ -44,6 +50,10 @@ class GameForm extends React.Component {
       if (keys[i].includes('platforms-')) {
         values.platforms.push(keys[i].split('-')[1]);
       }
+    }
+
+    if (this.state.rating) {
+      values.review = {rating: this.state.rating};
     }
 
     return values;
@@ -81,17 +91,17 @@ class GameForm extends React.Component {
       <form
         onSubmit={
           this.props.handleSubmit(
-            values => this.props.onSubmit(this.normalizeCheckboxes(values))
+            values => this.props.onSubmit(this.normalizeFormValues(values))
           )
         }
-        style={this.style.form}
+        style={style.form}
       >
         <Field name='title'
           component={TextField}
           hintText='Rocket League®'
           floatingLabelText='Título'
           floatingLabelFixed={true}
-          style={this.style.field}
+          style={style.field}
         />
         Gêneros
         {this.renderGenres()}
@@ -102,21 +112,29 @@ class GameForm extends React.Component {
           hintText='36.99'
           floatingLabelText='Preço'
           floatingLabelFixed={true}
-          style={this.style.field}
+          style={style.field}
         />
         <Field name='release'
           component={TextField}
           hintText='2015'
           floatingLabelText='Ano de Lançamento'
           floatingLabelFixed={true}
-          style={this.style.field}
+          style={style.field}
+        />
+        Avaliação
+        <RatingStars
+          count={5}
+          size={24}
+          color2={'#FDD835'}
+          value={this.state.ratng}
+          onChange={value => this.onChangeRating(value)}
         />
         <RaisedButton
           label='Adicionar'
           primary={true}
           onTouchTap={
             this.props.handleSubmit(
-              values => this.props.onSubmit(this.normalizeCheckboxes(values))
+              values => this.props.onSubmit(this.normalizeFormValues(values))
             )
           }
         />

@@ -36,14 +36,18 @@ const create = (req, res) => {
       })
       .then(game => {
         if (req.body.review) {
-          return game
-            .setReview(req.body.review, {transaction: t})
-            .then(() => game);
+          return db.Review
+            .create(req.body.review, {transaction: t})
+            .then(newReview => {
+              return game
+                .setReview(newReview.id, {transaction: t})
+                .then(() => game);
+            });
         }
         return game;
       });
   })
-  .then(newGame => 
+  .then(newGame =>
     Game
       .findById(newGame.id, {
         include: [

@@ -9,9 +9,16 @@ import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 
 class Toolbar extends Component {
+  style = {
+    toolbar: {
+      paddingLeft: '10%',
+      paddingRight: '10%',
+    },
+  }
+
   render() {
     return (
-      <CoreToolbar>
+      <CoreToolbar style={this.style.toolbar}>
         <ToolbarGroup firstChild={true}>
           <ToolbarTitle text='Cerebral' />
           <FlatButton
@@ -21,12 +28,12 @@ class Toolbar extends Component {
             onTouchTap={this.props.handleOpenGamesDialog}
           />
           <FlatButton
-            label='Adicionar gênero'
+            label='Gêneros'
             icon={<FontIcon className='material-icons'>games</FontIcon>}
             onTouchTap={this.props.handleOpenGenresDialog}
           />
           <FlatButton
-            label='Adicionar plataforma'
+            label='Plataformas'
             icon={<FontIcon className='material-icons'>videogame_asset</FontIcon>}
             onTouchTap={this.props.handleOpenPlatformDialog}
           />

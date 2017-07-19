@@ -6,6 +6,13 @@ import { List } from 'material-ui/List';
 import Game from './Game';
 
 class GameList extends Component {
+  style = {
+    list: {
+      paddingLeft: '10%',
+      paddingRight: '10%',
+    },
+  }
+
   componentDidMount() {
     this.props.fetchData('http://localhost:5000/api/games');
   }
@@ -20,7 +27,7 @@ class GameList extends Component {
     }
 
     return (
-      <List>
+      <List style={this.style.list}>
         {this.props.games.map((game) => (
           <Game
             key={game.id}
@@ -28,6 +35,8 @@ class GameList extends Component {
             title={game.title}
             price={game.price}
             release={game.release}
+            genres={game.genres}
+            platforms={game.platforms}
           />
         ))}
       </List>

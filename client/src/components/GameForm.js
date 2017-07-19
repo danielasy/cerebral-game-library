@@ -67,7 +67,7 @@ class GameForm extends React.Component {
       return (
         <Field
           key={platform.id}
-          name={`platforms-${i}`}
+          name={`platforms-${platform.id}`}
           component={Checkbox}
           label={platform.name}
           value={platform.id.toString()}

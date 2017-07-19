@@ -1,4 +1,3 @@
-
 export function genresIsLoading(isLoading) {
   return {
     type: 'GENRES_IS_LOADING',

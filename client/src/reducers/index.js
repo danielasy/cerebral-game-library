@@ -11,6 +11,16 @@ import {
   genresIsDeleting,
   genresDeleteHasFailed,
 } from './genres';
+import {
+  platforms,
+  platformsLoadHasFailed,
+  platformsIsLoading,
+  platformsToggleDialog,
+  platformsIsAdding,
+  platformsAddHasFailed,
+  platformsIsDeleting,
+  platformsDeleteHasFailed,
+} from './platforms';
 
 export default combineReducers({
   form: formReducer,
@@ -25,4 +35,12 @@ export default combineReducers({
   genresAddHasFailed,
   genresIsDeleting,
   genresDeleteHasFailed,
+  platforms,
+  platformsLoadHasFailed,
+  platformsIsLoading,
+  platformsIsDialogOpen: platformsToggleDialog,
+  platformsIsAdding,
+  platformsAddHasFailed,
+  platformsIsDeleting,
+  platformsDeleteHasFailed,
 });

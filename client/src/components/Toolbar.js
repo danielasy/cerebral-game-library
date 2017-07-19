@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { genresOpenDialog } from '../actions/genres';
+import { platformsOpenDialog } from '../actions/platforms';
 import { Toolbar as CoreToolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -20,11 +21,12 @@ class Toolbar extends Component {
           <FlatButton
             label='Adicionar gênero'
             icon={<FontIcon className='material-icons'>games</FontIcon>}
-            onTouchTap={this.props.handleOpen}
+            onTouchTap={this.props.handleOpenGenresDialog}
           />
           <FlatButton
             label='Adicionar plataforma'
             icon={<FontIcon className='material-icons'>videogame_asset</FontIcon>}
+            onTouchTap={this.props.handleOpenPlatformDialog}
           />
         </ToolbarGroup>
       </CoreToolbar>
@@ -40,7 +42,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleOpen: () => dispatch(genresOpenDialog()),
+    handleOpenGenresDialog: () => dispatch(genresOpenDialog()),
+    handleOpenPlatformDialog: () => dispatch(platformsOpenDialog()),
   };
 };
 

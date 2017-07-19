@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Toolbar from './Toolbar';
 import GenreDialog from './GenreDialog';
+import PlatformDialog from './PlatformDialog';
 import GameList from './GameList';
 
 injectTapEventPlugin();
@@ -15,6 +16,7 @@ class App extends Component {
         <div className='app-container'>
           <Toolbar />
           <GenreDialog />
+          <PlatformDialog />
           <GameList />
         </div>
       </MuiThemeProvider>

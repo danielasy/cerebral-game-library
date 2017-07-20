@@ -8,7 +8,7 @@ import { List, ListItem } from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
 import PlatformForm from './PlatformForm';
 
-const apiUrl = 'http://localhost:5000/api/platforms';
+const apiUrl = '/api/platforms';
 
 class PlatformDialog extends React.Component {
   renderGenres() {

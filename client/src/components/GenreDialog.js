@@ -8,7 +8,7 @@ import { List, ListItem } from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
 import GenreForm from './GenreForm';
 
-const apiUrl = 'http://localhost:5000/api/genres';
+const apiUrl = '/api/genres';
 
 class GenreDialog extends React.Component {
   renderGenres() {

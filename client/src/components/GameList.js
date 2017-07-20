@@ -16,7 +16,7 @@ class GameList extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchData('http://localhost:5000/api/games');
+    this.props.fetchData('/api/games');
   }
 
   render() {

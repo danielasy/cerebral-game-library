@@ -13,9 +13,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(cors());
 }
 
-app.get('/', function(req, res) {
-  res.send('Ok');
-});
+app.use(express.static('./client/dist'));
 
 app.use('/api', api);
 

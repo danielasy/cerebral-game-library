@@ -27,6 +27,12 @@ body {
 	width: 100%;
 }
 
+.game-list-message {
+	width: 100%;
+	padding: 50px 0;
+	text-align: center;
+};
+
 .game-title {
 	font-size: 18px;
 	margin-bottom: 5px;
@@ -39,7 +45,8 @@ body {
   vertical-align: top;
 }
 
-.price-estimate {
+.app-footer {
+	font-size: 14px;
 	padding: 40px 0;
 	text-align: center;
 }

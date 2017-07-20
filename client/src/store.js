@@ -5,7 +5,10 @@ import rootReducer from './reducers';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const defaultState = {
-  games: [ ],
+  games: [],
+  genres: [],
+  platforms: [],
+  gamesSortBy: 'title-asc',
 };
 
 export default function store(initialState = defaultState) {

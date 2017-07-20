@@ -4,14 +4,16 @@ import { ListItem } from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
 import RatingStars from 'react-stars';
 
-class Game extends Component {
-  iconStyle = {
+const style = {
+  iconStyle: {
     fontSize: '24px',
     lineHeight: '24px',
     marginRight: '5px',
     veticalAlign: 'middle',
-  }
+  },
+};
 
+class Game extends Component {
   getPlatforms() {
     if (!this.props.platforms || !this.props.platforms.length) {
       return 'N/A';
@@ -55,19 +57,19 @@ class Game extends Component {
     return (
       <article>
         <span className='game-info'>
-          <FontIcon className='material-icons' style={this.iconStyle}>videogame_asset</FontIcon>
+          <FontIcon className='material-icons' style={style.iconStyle}>videogame_asset</FontIcon>
           {this.getPlatforms()}
         </span>
         <span className='game-info'>
-          <FontIcon className='material-icons' style={this.iconStyle}>description</FontIcon>
+          <FontIcon className='material-icons' style={style.iconStyle}>description</FontIcon>
           {this.getGenres()}
         </span>
         <span className='game-info'>
-          <FontIcon className='material-icons' style={this.iconStyle}>attach_money</FontIcon>
+          <FontIcon className='material-icons' style={style.iconStyle}>attach_money</FontIcon>
           {this.props.price ? `R$ ${this.props.price}` : 'N/A'}
         </span>
         <span className='game-info'>
-          <FontIcon className='material-icons' style={this.iconStyle}>date_range</FontIcon>
+          <FontIcon className='material-icons' style={style.iconStyle}>date_range</FontIcon>
           Ano de lançamento: {this.getReleaseYear(this.props.release)}
         </span>
         {this.getRating()}

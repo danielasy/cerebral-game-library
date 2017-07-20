@@ -21,11 +21,23 @@ class GameList extends Component {
 
   render() {
     if (this.props.hasFailedLoading) {
-      return <p>Desculpe, houve um problema ao tentar carregar seus jogos :(</p>;
+      return (
+        <section className='game-list'>
+          <div className='game-list-message'>
+            Desculpe, houve um problema ao tentar carregar seus jogos :(
+          </div>
+        </section>
+      );
     }
 
     if (this.props.isLoading) {
-      return <p>Carregando seus jogos…</p>;
+      return (
+        <section className='game-list'>
+          <div className='game-list-message'>
+            Carregando seus jogos…
+          </div>
+        </section>
+      );
     }
 
     return (

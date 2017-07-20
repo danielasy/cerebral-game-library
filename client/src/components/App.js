@@ -20,6 +20,9 @@ class App extends Component {
           <GenreDialog />
           <PlatformDialog />
           <GameList />
+          <footer className='app-footer'>
+            Cerebral Game Library © 2017
+          </footer>
         </div>
       </MuiThemeProvider>
     );

@@ -8,7 +8,7 @@ import { List, ListItem } from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
 import GameForm from './GameForm';
 
-const apiUrl = 'http://localhost:5000/api/games';
+const apiUrl = '/api/games';
 
 class GameDialog extends React.Component {
   render() {

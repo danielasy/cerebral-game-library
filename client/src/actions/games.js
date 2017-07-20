@@ -34,7 +34,7 @@ export function gamesFetchData(url) {
       })
       .then((response) => response.json())
       .then((games) => dispatch(gamesLoadSuccess(games)))
-      .catch(() => dispatch(gamesLoadHasFailed(true)));
+      .catch(() => dispatch(gamesLoadHasFailed()));
   };
 }
 

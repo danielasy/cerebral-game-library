@@ -126,7 +126,7 @@ class GameForm extends React.Component {
           count={5}
           size={24}
           color2={'#FDD835'}
-          value={this.state.ratng}
+          value={this.state.rating}
           onChange={value => this.onChangeRating(value)}
         />
         <RaisedButton

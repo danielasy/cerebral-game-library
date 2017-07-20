@@ -57,8 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
-# nwb
-dist
-
 # General
 .DS_Store

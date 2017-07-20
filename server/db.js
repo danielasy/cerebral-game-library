@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import glob from 'glob';
 import path from 'path';
-import config from '../config/db';
+import config from './config/db';
 
 const env = process.env.NODE_ENV || 'development';
 const db = {};

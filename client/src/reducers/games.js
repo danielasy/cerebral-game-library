@@ -1,3 +1,5 @@
+import { sortGames as sort } from '../helpers/sort';
+
 export function gamesIsLoading(state = false, action) {
   switch (action.type) {
     case 'GAMES_IS_LOADING':
@@ -24,6 +26,8 @@ export function games(state = [], action) {
       return state.concat([action.game]);
     case 'GAMES_DELETE_SUCCESS':
       return state.filter(game => game.id !== action.id);
+    case 'GAMES_SORT':
+      return sort(state, action.sortBy);
     default:
       return state;
   }
@@ -70,6 +74,15 @@ export function gamesDeleteHasFailed(state = false, action) {
   switch (action.type) {
     case 'GAMES_DELETE_HAS_FAILED':
       return true;
+    default:
+      return state;
+  }
+}
+
+export function gamesSetSortBy(state = 'title-asc', action) {
+  switch (action.type) {
+    case 'GAMES_SORT':
+      return action.sortBy;
     default:
       return state;
   }

@@ -11,15 +11,15 @@ import FontIcon from 'material-ui/FontIcon';
 class Toolbar extends Component {
   style = {
     toolbar: {
-      paddingLeft: '10%',
-      paddingRight: '10%',
+      paddingLeft: '7.5%',
+      paddingRight: '7.5%',
     },
   }
 
   render() {
     return (
       <CoreToolbar style={this.style.toolbar}>
-        <ToolbarGroup firstChild={true}>
+        <ToolbarGroup>
           <ToolbarTitle text='Cerebral' />
           <FlatButton
             label='Adicionar jogo'

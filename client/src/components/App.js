@@ -7,7 +7,6 @@ import GameDialog from './GameDialog';
 import GenreDialog from './GenreDialog';
 import PlatformDialog from './PlatformDialog';
 import GameList from './GameList';
-import PriceEstimate from './PriceEstimate';
 
 injectTapEventPlugin();
 
@@ -21,7 +20,6 @@ class App extends Component {
           <GenreDialog />
           <PlatformDialog />
           <GameList />
-          <PriceEstimate />
         </div>
       </MuiThemeProvider>
     );

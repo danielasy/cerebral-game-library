@@ -142,3 +142,10 @@ export function gamesDelete(id, url) {
       .catch(error => dispatch(gamesDeleteHasFailed(error)));
   };
 }
+
+export function gamesSort(sortBy) {
+  return {
+    type: 'GAMES_SORT',
+    sortBy,
+  };
+}

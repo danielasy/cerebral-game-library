@@ -9,6 +9,7 @@ import {
   gamesAddHasFailed,
   gamesIsDeleting,
   gamesDeleteHasFailed,
+  gamesSetSortBy,
 } from './games';
 import {
   genres,
@@ -41,6 +42,7 @@ export default combineReducers({
   gamesAddHasFailed,
   gamesIsDeleting,
   gamesDeleteHasFailed,
+  gamesSortBy: gamesSetSortBy,
   genres,
   genresLoadHasFailed,
   genresIsLoading,

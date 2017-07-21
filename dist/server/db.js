@@ -16,7 +16,7 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _db = require('../config/db');
+var _db = require('./config/db');
 
 var _db2 = _interopRequireDefault(_db);
 

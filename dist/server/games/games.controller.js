@@ -11,6 +11,8 @@ var _db2 = _interopRequireDefault(_db);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var Game = _db2.default.Game;
 
 var index = function index(req, res) {
@@ -26,6 +28,23 @@ var index = function index(req, res) {
 var create = function create(req, res) {
   _db2.default.sequelize.transaction(function (t) {
     return Game.create(req.body, { transaction: t }).then(function (game) {
+      // Create new genres if necessary
+      if (req.body.newGenres) {
+        return Promise.all(req.body.newGenres.map(function (genre) {
+          return _db2.default.Genre.create({ name: genre }, { transaction: t });
+        })).then(function (newGenres) {
+          var _req$body$genres;
+
+          return (_req$body$genres = req.body.genres).push.apply(_req$body$genres, _toConsumableArray(newGenres.map(function (genre) {
+            return genre.id;
+          })));
+        }).then(function () {
+          return game;
+        });
+      }
+      return game;
+    }).then(function (game) {
+      // Add genres
       if (req.body.genres) {
         return game.setGenres(req.body.genres, { transaction: t }).then(function () {
           return game;
@@ -33,6 +52,23 @@ var create = function create(req, res) {
       }
       return game;
     }).then(function (game) {
+      // Create new platforms if necessary
+      if (req.body.newPlatforms) {
+        return Promise.all(req.body.newPlatforms.map(function (platform) {
+          return _db2.default.Platform.create({ name: platform }, { transaction: t });
+        })).then(function (newPlatforms) {
+          var _req$body$platforms;
+
+          return (_req$body$platforms = req.body.platforms).push.apply(_req$body$platforms, _toConsumableArray(newPlatforms.map(function (platform) {
+            return platform.id;
+          })));
+        }).then(function () {
+          return game;
+        });
+      }
+      return game;
+    }).then(function (game) {
+      // Add platform
       if (req.body.platforms) {
         return game.setPlatforms(req.body.platforms, { transaction: t }).then(function () {
           return game;
@@ -40,6 +76,7 @@ var create = function create(req, res) {
       }
       return game;
     }).then(function (game) {
+      // Add review
       if (req.body.review) {
         return _db2.default.Review.create(req.body.review, { transaction: t }).then(function (newReview) {
           return game.setReview(newReview.id, { transaction: t }).then(function () {

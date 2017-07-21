@@ -18,7 +18,17 @@ const index = (req, res) => {
 const create = (req, res) => {
   db.sequelize.transaction((t) => {
     return Game.create(req.body, {transaction: t})
-      .then(game => {
+      .then(game => {     // Create new genres if necessary
+        if (req.body.newGenres) {
+          return Promise.all(
+              req.body.newGenres.map(genre => db.Genre.create({name: genre}, {transaction: t}))
+            )
+            .then(newGenres => req.body.genres.push(...newGenres.map(genre => genre.id)))
+            .then(() => game);
+        }
+        return game;
+      })
+      .then(game => {     // Add genres
         if (req.body.genres) {
           return game
             .setGenres(req.body.genres, {transaction: t})
@@ -26,7 +36,17 @@ const create = (req, res) => {
         }
         return game;
       })
-      .then(game => {
+      .then(game => {     // Create new platforms if necessary
+        if (req.body.newPlatforms) {
+          return Promise.all(
+              req.body.newPlatforms.map(platform => db.Platform.create({name: platform}, {transaction: t}))
+            )
+            .then(newPlatforms => req.body.platforms.push(...newPlatforms.map(platform => platform.id)))
+            .then(() => game);
+        }
+        return game;
+      })
+      .then(game => {     // Add platform
         if (req.body.platforms) {
           return game
             .setPlatforms(req.body.platforms, {transaction: t})
@@ -34,7 +54,7 @@ const create = (req, res) => {
         }
         return game;
       })
-      .then(game => {
+      .then(game => {     // Add review
         if (req.body.review) {
           return db.Review
             .create(req.body.review, {transaction: t})

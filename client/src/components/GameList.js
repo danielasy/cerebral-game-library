@@ -7,7 +7,7 @@ import Game from './Game';
 import GameListToolbar from './GameListToolbar';
 import { getPriceEstimate } from '../helpers/price';
 
-const apiUrl = 'http://localhost:5000/api/games';
+const apiUrl = '/api/games';
 
 class GameList extends Component {
   style = {

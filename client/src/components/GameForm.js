@@ -7,8 +7,8 @@ import RatingStars from 'react-stars';
 import GenreInput from './GenreInput';
 import PlatformInput from './PlatformInput';
 
-const apiUrlGenres = 'http://localhost:5000/api/genres';
-const apiUrlPlatforms = 'http://localhost:5000/api/platforms';
+const apiUrlGenres = '/api/genres';
+const apiUrlPlatforms = '/api/platforms';
 
 const validate = values => {
   const errors = {};

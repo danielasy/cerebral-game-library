@@ -7,7 +7,7 @@ import { platformsFetchData } from '../actions/platforms';
 import Dialog from 'material-ui/Dialog';
 import GameForm from './GameForm';
 
-const apiUrl = 'http://localhost:5000/api/games';
+const apiUrl = '/api/games';
 
 class GameDialog extends React.Component {
   render() {

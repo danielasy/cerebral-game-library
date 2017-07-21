@@ -19,11 +19,11 @@ export function gamesLoadHasFailed() {
 }
 
 export function gamesFetchData(url) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(gamesIsLoading(true));
 
     fetch(url)
-      .then((response) => {
+      .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
@@ -32,8 +32,8 @@ export function gamesFetchData(url) {
 
         return response;
       })
-      .then((response) => response.json())
-      .then((games) => dispatch(gamesLoadSuccess(games)))
+      .then(response => response.json())
+      .then(games => dispatch(gamesLoadSuccess(games)))
       .catch(() => dispatch(gamesLoadHasFailed()));
   };
 }
@@ -75,7 +75,8 @@ export function gamesAddHasFailed(error) {
 }
 
 export function gamesAdd(game, url) {
-  return (dispatch) => {
+  return dispatch => {
+    dispatch(gamesCloseDialog());
     dispatch(gamesIsAdding(game, true));
 
     fetch(url, {
@@ -123,7 +124,7 @@ export function gamesDeleteHasFailed(error) {
 }
 
 export function gamesDelete(id, url) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(gamesIsDeleting(id, true));
 
     fetch(`${url}/${id}`, {

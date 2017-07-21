@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, destroy } from 'redux-form';
 import { TextField, Checkbox } from 'redux-form-material-ui';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import RatingStars from 'react-stars';
+import GenreInput from './GenreInput';
+import PlatformInput from './PlatformInput';
+
+const apiUrlGenres = 'http://localhost:5000/api/genres';
+const apiUrlPlatforms = 'http://localhost:5000/api/platforms';
 
 const validate = values => {
   const errors = {};
@@ -25,75 +30,77 @@ const style = {
   form: {
     marginBottom: '20px',
   },
+  submitButton: {
+    float: 'right',
+  },
 };
 
 class GameForm extends React.Component {
   constructor() {
     super();
-    this.state = {rating: 0};
+    this.state = {genres: [], platforms: [], rating: 0};
   }
 
-  onChangeRating(value) {
-    this.setState({rating: value});
+  componentDidMount() {
+    this.props.fetchGenres(apiUrlGenres);
+    this.props.fetchPlatforms(apiUrlPlatforms);
   }
 
-  normalizeFormValues(values) {
-    const keys = Object.keys(values);
-    const length = keys.length;
-    values.genres = [];
-    values.platforms = [];
+  onChangeGenres(genres) {
+    this.setState(Object.assign({}, this.state, {genres}));
+  }
 
-    for (let i = 0; i < length; i++) {
-      if (keys[i].includes('genres-')) {
-        values.genres.push(keys[i].split('-')[1]);
-      }
-      if (keys[i].includes('platforms-')) {
-        values.platforms.push(keys[i].split('-')[1]);
+  onChangePlatforms(platforms) {
+    this.setState(Object.assign({}, this.state, {platforms}));
+  }
+
+  onChangeRating(rating) {
+    this.setState(Object.assign({}, this.state, {rating}));
+  }
+
+  // Normalize genre, platoform and rating information before submitting form
+  normalizeFormValues(formValues) {
+    formValues.genres = [];
+    formValues.newGenres = [];
+    formValues.platforms = [];
+    formValues.newPlatforms = [];
+
+    // Verify which genres already exist
+    for (let i = 0; i < this.state.genres.length; i++) {
+      const registeredGenre = this.props.genres.find(genre => genre.name === this.state.genres[i]);
+
+      if (registeredGenre) {
+        formValues.genres.push(registeredGenre.id);
+      } else {
+        formValues.newGenres.push(this.state.genres[i]);
       }
     }
 
+    // Verify which platforms already exist
+    for (let i = 0; i < this.state.platforms.length; i++) {
+      const registeredPlatform = this.props.platforms.find(platform => platform.name === this.state.platforms[i]);
+
+      if (registeredPlatform) {
+        formValues.platforms.push(registeredPlatform.id);
+      } else {
+        formValues.newPlatforms.push(this.state.platforms[i]);
+      }
+    }
+
+    // Save rating only if set
     if (this.state.rating) {
-      values.review = {rating: this.state.rating};
+      formValues.review = {rating: this.state.rating};
     }
 
-    return values;
-  }
-
-  renderGenres() {
-    return this.props.genres.map((genre, i) =>{
-      return (
-        <Field
-          key={genre.id}
-          name={`genres-${genre.id}`}
-          component={Checkbox}
-          label={genre.name}
-        />
-      )
-    })
-  }
-
-  renderPlatforms() {
-    return this.props.platforms.map((platform, i) =>{
-      return (
-        <Field
-          key={platform.id}
-          name={`platforms-${platform.id}`}
-          component={Checkbox}
-          label={platform.name}
-          value={platform.id.toString()}
-        />
-      )
-    })
+    return formValues;
   }
 
   render() {
     return (
       <form
-        onSubmit={
-          this.props.handleSubmit(
-            values => this.props.onSubmit(this.normalizeFormValues(values))
-          )
-        }
+        onSubmit={this.props.handleSubmit(
+          values => this.props.onSubmit(this.normalizeFormValues(values))
+        )}
         style={style.form}
       >
         <Field name='title'
@@ -103,10 +110,16 @@ class GameForm extends React.Component {
           floatingLabelFixed={true}
           style={style.field}
         />
-        Gêneros
-        {this.renderGenres()}
-        Plataformas
-        {this.renderPlatforms()}
+        <GenreInput
+          component={GenreInput}
+          onChange={genres => this.onChangeGenres(genres)}
+          genres={this.props.genres.map(genre => genre.name)}
+        />
+        <PlatformInput
+          component={PlatformInput}
+          onChange={platforms => this.onChangePlatforms(platforms)}
+          platforms={this.props.platforms.map(platform => platform.name)}
+        />
         <Field name='price'
           component={TextField}
           hintText='36.99'
@@ -129,14 +142,13 @@ class GameForm extends React.Component {
           value={this.state.rating}
           onChange={value => this.onChangeRating(value)}
         />
-        <RaisedButton
-          label='Adicionar'
+        <FlatButton
           primary={true}
-          onTouchTap={
-            this.props.handleSubmit(
-              values => this.props.onSubmit(this.normalizeFormValues(values))
-            )
-          }
+          label='Adicionar Jogo'
+          onTouchTap={this.props.handleSubmit(
+            values => this.props.onSubmit(this.normalizeFormValues(values))
+          )}
+          style={style.submitButton}
         />
       </form>
     );
@@ -147,6 +159,8 @@ GameForm.propTypes = {
   genres: PropTypes.array.isRequired,
   platforms: PropTypes.array.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  fetchGenres: PropTypes.func.isRequired,
+  fetchPlatforms: PropTypes.func.isRequired,
 };
 
 GameForm = reduxForm({

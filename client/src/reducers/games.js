@@ -12,7 +12,7 @@ export function gamesIsLoading(state = false, action) {
 export function gamesLoadHasFailed(state = false, action) {
   switch (action.type) {
     case 'GAMES_LOAD_HAS_FAILED':
-      return action.hasFailed;
+      return true;
     default:
       return state;
   }

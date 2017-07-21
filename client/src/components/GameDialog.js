@@ -1,29 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { gamesFetchData, gamesCloseDialog, gamesAdd, gamesDelete } from '../actions/games';
+import { gamesCloseDialog, gamesAdd, gamesDelete } from '../actions/games';
+import { genresFetchData } from '../actions/genres';
+import { platformsFetchData } from '../actions/platforms';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import { List, ListItem } from 'material-ui/List';
-import FontIcon from 'material-ui/FontIcon';
 import GameForm from './GameForm';
 
-const apiUrl = '/api/games';
+const apiUrl = 'http://localhost:5000/api/games';
 
 class GameDialog extends React.Component {
   render() {
-    const dialogActions = [
-      <FlatButton
-        key='close'
-        label='Fechar'
-        onTouchTap={this.props.handleClose}
-      />,
-    ]
-
     return (
       <Dialog
         title='Adicionar Jogo'
-        actions={dialogActions}
         modal={false}
         open={this.props.isOpen}
         onRequestClose={this.props.handleClose}
@@ -33,6 +23,8 @@ class GameDialog extends React.Component {
           onSubmit={this.props.add}
           genres={this.props.genres}
           platforms={this.props.platforms}
+          fetchGenres={this.props.fetchGenres}
+          fetchPlatforms={this.props.fetchPlatforms}
         />
       </Dialog>
     );
@@ -65,6 +57,8 @@ const mapDispatchToProps = (dispatch) => {
     handleClose: () => dispatch(gamesCloseDialog()),
     add: game => dispatch(gamesAdd(game, apiUrl)),
     remove: id => dispatch(gamesDelete(id, apiUrl)),
+    fetchGenres: url => dispatch(genresFetchData(url)),
+    fetchPlatforms: url => dispatch(platformsFetchData(url)),
   };
 };
 

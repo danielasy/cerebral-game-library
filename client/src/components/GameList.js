@@ -7,6 +7,8 @@ import Game from './Game';
 import GameListToolbar from './GameListToolbar';
 import { getPriceEstimate } from '../helpers/price';
 
+const apiUrl = 'http://localhost:5000/api/games';
+
 class GameList extends Component {
   style = {
     list: {
@@ -16,7 +18,7 @@ class GameList extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchData('/api/games');
+    this.props.fetchData(apiUrl);
   }
 
   render() {
